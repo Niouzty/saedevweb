@@ -17,8 +17,8 @@ class VueConnexion extends VueGenerique {
                 <div class="login-form">
                     <h1>Connexion</h1>
                     <form action="?module=connexion&action=verifier" method="POST">
-                        <label for="username">Identifiant:</label>
-                        <input type="text" id="username" name="username" required>
+                        <label for="email">Identifiant:</label>
+                        <input type="text" id="email" name="email" required>
                         
                         <label for="password">Mot de passe:</label>
                         <input type="password" id="password" name="password" required>
