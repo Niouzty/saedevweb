@@ -1,4 +1,5 @@
 <?php
+
 class ModeleConnexion extends ModeleGenerique {
     public function verifierEnseignant($email, $password) {
         $query = $this->bdd->prepare("SELECT * FROM enseignant WHERE email = :email");
@@ -26,4 +27,3 @@ class ModeleConnexion extends ModeleGenerique {
         return false;
     }
 }
-?>
