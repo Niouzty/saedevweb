@@ -1,4 +1,5 @@
 <?php
+require_once 'modules/mod_connexion/vue_connexion.php';
 class ControleurConnexion {
     protected $modele;
 
