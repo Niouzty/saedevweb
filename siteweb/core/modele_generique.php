@@ -1,5 +1,5 @@
 <?php
-require_once 'Connexion.php'; // Assurez-vous que le fichier Connexion.php existe
+require_once 'connexion.php'; // Assurez-vous que le fichier Connexion.php existe
 
 abstract class ModeleGenerique {
     protected $bdd;
