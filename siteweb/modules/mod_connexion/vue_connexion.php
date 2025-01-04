@@ -32,4 +32,3 @@ class VueConnexion extends VueGenerique {
         <?php
     }
 }
-œ
