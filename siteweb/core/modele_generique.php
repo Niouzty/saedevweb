@@ -1,4 +1,6 @@
 <?php
+require_once 'Connexion.php'; // Assurez-vous que le fichier Connexion.php existe
+
 abstract class ModeleGenerique {
     protected $bdd;
 
@@ -8,22 +10,15 @@ abstract class ModeleGenerique {
 
     /**
      * Méthode pour établir une connexion à la base de données.
-     * Configure PDO avec des options pour la gestion des erreurs.
+     * Utilise la classe Connexion pour gérer la connexion.
      */
     private function connecterBDD() {
         try {
-            // Connexion à PostgreSQL
-            return new PDO('pgsql:host=dpg-ctqr9hrtq21c73a8n420-a.frankfurt-postgres.render.com;dbname=db_etudiants;port=5432', 
-                           'db_etudiants_user', 
-                           'OrT6gi8ppzdJGmbexXQpcsh0lGk0JNOK', [
-                               PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                               PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                           ]);
+            // Utilisation de la connexion centralisée
+            return Connexion::getBdd();
         } catch (PDOException $e) {
-            die('Erreur de connexion à la base de données : ' . $e->getMessage());
+            die('Erreur de connexion à la base de données via le modèle générique : ' . $e->getMessage());
         }
     }
 }
-
 ?>
-
