@@ -1,5 +1,4 @@
 <?php
-require_once 'modules/mod_connexion/vue_connexion.php';
 
 class ControleurConnexion {
     protected $modele;
@@ -14,16 +13,17 @@ class ControleurConnexion {
     }
 
     public function verifierConnexion() {
+        // Vérifie que les données sont présentes
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-            $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+            $password = $_POST['password']; // Pas de FILTER_SANITIZE_STRING car non recommandé
 
             // Vérification des enseignants
             $enseignant = $this->modele->verifierEnseignant($email, $password);
             if ($enseignant) {
                 $_SESSION['user_id'] = $enseignant['id_enseignant'];
-                $_SESSION['role'] = 'enseignant'; // Gestion du rôle
-                header('Location: /dashboard-enseignant'); // Redirection spécifique
+                $_SESSION['role'] = 'enseignant';
+                header('Location: /dashboard-enseignant');
                 exit;
             }
 
@@ -31,16 +31,16 @@ class ControleurConnexion {
             $etudiant = $this->modele->verifierEtudiant($email, $password);
             if ($etudiant) {
                 $_SESSION['user_id'] = $etudiant['id_etudiant'];
-                $_SESSION['role'] = 'etudiant'; // Gestion du rôle
-                header('Location: /dashboard-etudiant'); // Redirection spécifique
+                $_SESSION['role'] = 'etudiant';
+                header('Location: /dashboard-etudiant');
                 exit;
             }
 
-            // Si aucune correspondance trouvée
-            echo "Email ou mot de passe incorrect.";
+            // Message d'erreur si utilisateur non trouvé
+            echo "Identifiant ou mot de passe incorrect.";
         } else {
+            // Message d'erreur si champs manquants
             echo "Veuillez remplir tous les champs.";
         }
     }
 }
-?>
