@@ -2,7 +2,7 @@
 
 class ModeleConnexion extends ModeleGenerique {
     public function verifierEnseignant($email, $password) {
-        $query = $this->bdd->prepare("SELECT * FROM enseignant WHERE email = :email");
+        $query = $this->bdd->prepare("SELECT * FROM enseignants WHERE email = :email");
         $query->bindParam(':email', $email);
         $query->execute();
 
@@ -15,7 +15,7 @@ class ModeleConnexion extends ModeleGenerique {
     }
 
     public function verifierEtudiant($email, $password) {
-        $query = $this->bdd->prepare("SELECT * FROM etudiant WHERE email = :email");
+        $query = $this->bdd->prepare("SELECT * FROM etudiants WHERE email = :email");
         $query->bindParam(':email', $email);
         $query->execute();
 
