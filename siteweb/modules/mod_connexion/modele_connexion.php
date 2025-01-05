@@ -17,7 +17,7 @@ class ModeleConnexion extends ModeleGenerique {
     // Recherche dans les étudiants
     $query = $this->bdd->prepare("SELECT id_etudiant AS id, 'etudiant' AS role, password 
                                    FROM etudiant 
-                                   WHERE email = email");
+                                   WHERE email = :email");
     $query->bindParam(':email', $email);
     $query->execute();
     $etudiant = $query->fetch();
