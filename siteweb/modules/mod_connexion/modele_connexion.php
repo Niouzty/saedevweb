@@ -2,7 +2,6 @@
 
 class ModeleConnexion extends ModeleGenerique {
     public function verifierUtilisateur($email, $password) {
-   <?php
 $query = $this->bdd->prepare("SELECT id_enseignant AS id, 'enseignant' AS role, password 
                                FROM enseignant 
                                WHERE email = :email");
@@ -29,7 +28,5 @@ if (!$etudiant) {
 } else {
     echo "Étudiant trouvé : " . print_r($etudiant, true);
 }
-?>
-
 
 }
