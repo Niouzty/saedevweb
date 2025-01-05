@@ -1,29 +1,33 @@
 <?php
 
 class ModeleConnexion extends ModeleGenerique {
-    public function verifierEnseignant($email, $password) {
-        $query = $this->bdd->prepare("SELECT * FROM enseignant WHERE email = :email");
-        $query->bindParam(':email', $email);
-        $query->execute();
+    public function verifierUtilisateur($email, $password) {
+    // Recherche dans les enseignants
+    $query = $this->bdd->prepare("SELECT id_enseignant AS id, 'enseignant' AS role, password 
+                                   FROM enseignant 
+                                   WHERE email = :email");
+    $query->bindParam(':email', $email);
+    $query->execute();
+    $enseignant = $query->fetch();
 
-        $enseignant = $query->fetch();
-        if ($enseignant && password_verify($password, $enseignant['password'])) {
-            return $enseignant;
-        }
-
-        return false;
+    if ($enseignant && password_verify($password, $enseignant['password'])) {
+        return $enseignant;
     }
 
-    public function verifierEtudiant($email, $password) {
-        $query = $this->bdd->prepare("SELECT * FROM etudiant WHERE email = :email");
-        $query->bindParam(':email', $email);
-        $query->execute();
+    // Recherche dans les étudiants
+    $query = $this->bdd->prepare("SELECT id_etudiant AS id, 'etudiant' AS role, password 
+                                   FROM etudiant 
+                                   WHERE email = :email");
+    $query->bindParam(':email', $email);
+    $query->execute();
+    $etudiant = $query->fetch();
 
-        $etudiant = $query->fetch();
-        if ($etudiant && password_verify($password, $etudiant['password'])) {
-            return $etudiant;
-        }
-
-        return false;
+    if ($etudiant && password_verify($password, $etudiant['password'])) {
+        return $etudiant;
     }
+
+    // Aucun utilisateur trouvé
+    return false;
+}
+
 }
