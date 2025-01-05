@@ -10,8 +10,14 @@ class ModeleConnexion extends ModeleGenerique {
     $query->execute();
     $enseignant = $query->fetch();
 
-    if ($enseignant && password_verify($password, $enseignant['password'])) {
-        return $enseignant;
+    if ($enseignant) {
+        if (password_verify($password, $enseignant['password'])) {
+            return $enseignant;
+        } else {
+            echo "Mot de passe incorrect pour enseignant.";
+        }
+    } else {
+        echo "Aucun enseignant trouvé.";
     }
 
     // Recherche dans les étudiants
@@ -22,12 +28,19 @@ class ModeleConnexion extends ModeleGenerique {
     $query->execute();
     $etudiant = $query->fetch();
 
-    if ($etudiant && password_verify($password, $etudiant['password'])) {
-        return $etudiant;
+    if ($etudiant) {
+        if (password_verify($password, $etudiant['password'])) {
+            return $etudiant;
+        } else {
+            echo "Mot de passe incorrect pour étudiant.";
+        }
+    } else {
+        echo "Aucun étudiant trouvé.";
     }
 
     // Aucun utilisateur trouvé
     return false;
 }
+
 
 }
