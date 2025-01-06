@@ -14,6 +14,7 @@ if (!$enseignant) {
     echo "Aucun enseignant trouvé avec cet email.";
 } else {
     echo "Enseignant trouvé : " . print_r($enseignant, true);
+    return $enseignant;
 }
 
 // Faites la même chose pour les étudiants
