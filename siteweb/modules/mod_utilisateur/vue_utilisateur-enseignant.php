@@ -1,7 +1,14 @@
 <?php
 
-class VueUtilisateur extends VueGenerique {
-    public function afficherPageAcceuil() {
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Vérification du rôle (enseignant)
+if ($_SESSION['role'] !== 'enseignant') {
+    echo 'Accès interdit.';
+    exit;
+}
         ?>
         <!DOCTYPE html>
 <html lang="fr">
