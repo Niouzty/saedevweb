@@ -29,6 +29,7 @@ if (!$etudiant) {
     echo "Aucun étudiant trouvé avec cet email.";
 } else {
     echo "Étudiant trouvé : " . print_r($etudiant, true);
+    return $etudiant;
 }
 }
 
