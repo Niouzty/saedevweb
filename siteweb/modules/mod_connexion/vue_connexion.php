@@ -11,7 +11,7 @@ class VueConnexion extends VueGenerique {
             <title>Connexion</title>
             <link rel="stylesheet" href="/public/css/style.css"> <!-- Lien vers le CSS -->
         </head>
-        <body>
+        <body class="body-connexion">
             <div class="container">
                 <img src="/public/images/logo.png" alt="Logo IUT Montreuil" class="logo">
                 <div class="login-form">
