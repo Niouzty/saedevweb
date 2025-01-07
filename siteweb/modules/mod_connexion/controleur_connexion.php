@@ -3,14 +3,13 @@ require_once 'modules/mod_connexion/vue_connexion.php';
 
 class ControleurConnexion {
     protected $modele;
-    protected $vue;
 
     public function __construct() {
         $this->modele = new ModeleConnexion();
-        $this->vue = new VueConnexion();
     }
 
     public function afficherFormulaire() {
+        $vue = new VueConnexion();
         $vue->afficherFormulaire();
     }
 
