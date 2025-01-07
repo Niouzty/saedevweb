@@ -3,8 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-//class VueUtilisateur extends VueGenerique {
-  //  public function afficherPageAcceuil() {
+class VueUtilisateur extends VueGenerique {
+    public function afficherPageAcceuil() {
         ?>
         <!DOCTYPE html>
 <html lang="fr">
@@ -105,5 +105,5 @@ error_reporting(E_ALL);
 </body>
 </html>
         <?php
- //   }
-//}
+    }
+}
