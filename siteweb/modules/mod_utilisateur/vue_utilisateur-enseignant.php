@@ -30,7 +30,7 @@ error_reporting(E_ALL);
     <!-- Contenu principal -->
     <div class="container">
         <div class="emploi-du-temps">
-            <h1>Accueil Étudiant</h1>
+            <h1>Accueil Enseignant</h1>
             <h2>Jeudi 19 décembre 2024</h2>
             <table>
                 <thead>
