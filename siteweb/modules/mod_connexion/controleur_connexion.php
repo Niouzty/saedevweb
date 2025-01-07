@@ -31,7 +31,7 @@ class ControleurConnexion {
                 $_SESSION['role'] = $utilisateur['role'];
 
                 // Redirection en fonction du rôle
-                if ($utilisateur['role'] === 'enseignant') {
+                if ($utilisateur['role'] === 'etudiant') {
                     header('Location: /modules/mod_utilisateur/vue_utilisateur-enseignant.php'); // Page d'accueil de l'enseignant
                 } else {
                     header('Location: /modules/mod_utilisateur/vue_utilisateur-etudiant.php'); // Page d'accueil de l'étudiant
