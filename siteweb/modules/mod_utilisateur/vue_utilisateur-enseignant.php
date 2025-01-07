@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 //class VueUtilisateur extends VueGenerique {
-  //  public function afficherPageAcceuil() {
+    //public function afficherPageAcceuil() {
         ?>
         <!DOCTYPE html>
 <html lang="fr">
@@ -17,7 +17,7 @@ error_reporting(E_ALL);
 <body>
     <!-- Barre de navigation -->
     <div class="navbar">
-        <img src="/public/images/logo.png" alt="Logo IUT Montreuil">
+        <img src="/public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
         <div>
             <a href="#">Home</a>
             <a href="#">Texte</a>
@@ -105,5 +105,5 @@ error_reporting(E_ALL);
 </body>
 </html>
         <?php
- //   }
+    //}
 //}
