@@ -20,8 +20,8 @@ error_reporting(E_ALL);
         <img src="/public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
         <div>
             <a href="#">Home</a>
-            <a href="#">Texte</a>
-            <a href="#">Texte</a>
+            <a href="#">Projet</a>
+            <a href="#">Ressources</a>
             <a href="#">Messagerie</a>
             <a href="#">Déconnexion</a>
         </div>
