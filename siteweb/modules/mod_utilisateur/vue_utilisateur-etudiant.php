@@ -22,7 +22,7 @@ error_reporting(E_ALL);
             <a href="#">Home</a>
             <a href="#">Texte</a>
             <a href="#">Texte</a>
-            <a href="#">Messagerie</a>
+            <a href="/modules/mod_messagerie/vue_messagerie.php">Messagerie</a>
             <a href="#">Déconnexion</a>
         </div>
     </div>
