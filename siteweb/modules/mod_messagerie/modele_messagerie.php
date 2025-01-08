@@ -1,5 +1,5 @@
 <?php
-require_once "/core/module_generique";
+require_once "core/module_generique";
 
 class ModeleMessagerie extends ModeleGenerique {
     // Récupérer les groupes d'un utilisateur
