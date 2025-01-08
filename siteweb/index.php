@@ -13,7 +13,7 @@ require_once "site.php";
 
 
 
-if (isset($_GET['module']) && isset($this->modules[$_GET['module']])) {
+if (isset($_GET['module'])) {
             $module = $_GET['module'];
             require_once 'modules/mod_'.$module.'/module_'.$module.'.php';
             $classeModule = "Module" . ucfirst($module); // Exemple : "ModuleConnexion"
