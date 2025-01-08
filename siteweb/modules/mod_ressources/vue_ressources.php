@@ -14,17 +14,18 @@ error_reporting(E_ALL);
 <body class="body-ressource">
     <div class="ressource-container">
         <h1>Créer un projet</h1>
-        <form action="?action=enregistrerRessource" method="POST" enctype="multipart/form-data">
-            <label for="titre-ressource">Titre du projet :</label>
-            <input type="text" id="titre-ressource" name="titre" placeholder="Projet" required>
+        <form class="ressource-form" action="?action=enregistrerRessource" method="POST" enctype="multipart/form-data">
+            <label class="label-titre" for="titre-ressource">Titre du projet :</label>
+            <input class="input-titre" type="text" id="titre-ressource" name="titre" placeholder="Projet" required>
 
-            <label for="fichier-ressource">Ajouter un fichier ou un lien :</label>
-            <input type="file" id="fichier-ressource" name="fichier" required>
+            <label class="label-fichier" for="fichier-ressource">Ajouter un fichier ou un lien :</label>
+            <input class="input-fichier" type="file" id="fichier-ressource" name="fichier" required>
 
-            <button type="submit">Envoyer</button>
+            <button class="btn-submit" type="submit">Envoyer</button>
         </form>
     </div>
 </body>
+
 
 </html>
 <?php
