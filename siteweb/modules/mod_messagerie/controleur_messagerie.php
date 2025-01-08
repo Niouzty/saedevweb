@@ -1,4 +1,5 @@
 <?php
+require_once "modele_messagerie.php"
 class ControleurMessagerie {
     protected $modele;
 
