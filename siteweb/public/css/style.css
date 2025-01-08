@@ -155,26 +155,36 @@ h1 {
     margin-bottom: 20px;
 }
 
-.ressource-container form {
+.ressource-form {
     display: flex;
     flex-direction: column;
 }
 
-.ressource-container input,
-.ressource-container button {
+.label-titre,
+.label-fichier {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-titre,
+.input-fichier,
+.btn-submit {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.ressource-container button {
+.btn-submit {
     background-color: #007BFF;
     color: #fff;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.ressource-container button:hover {
+.btn-submit:hover {
     background-color: #0056b3;
 }
+
