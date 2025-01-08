@@ -30,6 +30,7 @@ class ModuleMessagerie extends ModuleGenerique {
             $this->controleur->afficherGroupes();
         }
     }
-}
- protected function creerControleur(){}
+protected function creerControleur(){}
 protected function creerModele(){}
+}
+
