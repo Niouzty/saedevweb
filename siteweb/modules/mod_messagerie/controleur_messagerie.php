@@ -1,5 +1,5 @@
 <?php
-require_once "modele_messagerie.php"
+require_once "modele_messagerie.php";
 class ControleurMessagerie {
     protected $modele;
 
