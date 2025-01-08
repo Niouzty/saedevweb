@@ -21,7 +21,7 @@ error_reporting(E_ALL);
         <div>
             <a href="#">Home</a>
             <a href="#">Projet</a>
-            <a href="modules/mod_ressources/vue_ressources.php">Ressources</a>
+            <a href="/modules/mod_ressources/vue_ressources.php">Ressources</a>
             <a href="#">Messagerie</a>
             <a href="#">Déconnexion</a>
         </div>
