@@ -10,7 +10,6 @@ class ModuleMessagerie extends ModuleGenerique {
     public function __construct() {
         $this->controleur = new ControleurMessagerie();
 
-        echo var_dump($_GET['action']);
         if (isset($_GET['action'])) {
             switch ($_GET['action']) {
                 case 'groupes':
