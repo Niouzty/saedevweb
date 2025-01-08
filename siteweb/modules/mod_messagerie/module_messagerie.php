@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 class ModuleMessagerie extends ModuleGenerique {
     public function __construct() {
         $this->controleur = new ControleurMessagerie();
-        echo vard_dump($_GET['action');
+        echo vard_dump($_GET['action'));
         if (isset($_GET['action'])) {
             switch ($_GET['action']) {
                 case 'groupes':
