@@ -10,6 +10,7 @@ class ControleurMessagerie {
     public function afficherGroupes() {
         $vue = new VueMessagerie();
         $groupes = $this->modele->getGroupes($_SESSION['user_id']);
+        echo "cccc";
         $vue->afficherGroupes($groupes);
     }
 
