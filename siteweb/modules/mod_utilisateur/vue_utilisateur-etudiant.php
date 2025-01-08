@@ -21,7 +21,7 @@ error_reporting(E_ALL);
             <a href="#">Home</a>
             <a href="#">Texte</a>
             <a href="#">Texte</a>
-            <a href="index.php/module=messagerie&action=groupes">Messagerie</a>
+            <a href="index.php?module=messagerie&action=groupes">Messagerie</a>
             <a href="#">Déconnexion</a>
         </div>
     </div>
