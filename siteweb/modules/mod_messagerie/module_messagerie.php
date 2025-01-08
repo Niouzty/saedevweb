@@ -2,9 +2,11 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-require_once 'modules/mod_messagerie/vue_messagerie.php';
+
 require_once 'modules/mod_messagerie/modele_messagerie.php';
 require_once 'modules/mod_messagerie/controleur_messagerie.php';
+require_once 'modules/mod_messagerie/vue_messagerie.php';
+
 
 class ModuleMessagerie extends ModuleGenerique {
     public function __construct() {
