@@ -31,4 +31,5 @@ class ModuleMessagerie extends ModuleGenerique {
         }
     }
 }
-
+ protected function creerControleur(){}
+protected function creerModele(){}
