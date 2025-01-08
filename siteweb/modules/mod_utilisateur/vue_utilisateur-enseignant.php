@@ -3,10 +3,29 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-//class VueUtilisateur extends VueGenerique {
-    //public function afficherPageAcceuil() {
-        ?>
-        <!DOCTYPE html>
+// Inclure la classe Connexion
+include 'Connexion.php'; // Assurez-vous que le chemin est correct
+session_start(); // Démarrer la session
+
+// Vous devez avoir l'id_enseignant dans la session pour récupérer le nom
+$id_enseignant = $_SESSION['id_enseignant']; // Assurez-vous que cette variable est définie lors de l'authentification
+
+// Récupérer la connexion à la base de données
+$pdo = Connexion::getBdd();
+
+// Requête pour récupérer le nom de l'enseignant
+$stmt = $pdo->prepare("SELECT nom FROM enseignant WHERE id_enseignant = :id_enseignant");
+$stmt->execute(['id_enseignant' => $id_enseignant]);
+$enseignant = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($enseignant) {
+    $nom = htmlspecialchars($enseignant['nom']); // Échapper les caractères spéciaux
+} else {
+    $nom = "Inconnu"; // Valeur par défaut si l'enseignant n'est pas trouvé
+}
+?>
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +49,7 @@ error_reporting(E_ALL);
     <!-- Contenu principal -->
     <div class="container">
         <div class="emploi-du-temps">
-            <h1>Accueil Enseignant</h1>
+            <h1>Bonjour <?php echo $nom; ?></h1> <!-- Affiche "Bonjour" + nom de l'enseignant -->
             <h2>Jeudi 19 décembre 2024</h2>
             <table>
                 <thead>
@@ -104,6 +123,6 @@ error_reporting(E_ALL);
     </div>
 </body>
 </html>
-        <?php
+
     //}
 //}
