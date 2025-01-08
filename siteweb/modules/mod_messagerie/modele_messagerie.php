@@ -3,10 +3,11 @@ class ModeleMessagerie extends ModeleGenerique {
     // Récupérer les groupes d'un utilisateur
     public function getGroupes($userId) {
         $query = $this->bdd->prepare("
-            SELECT g.id, g.name 
-            FROM groups g 
-            JOIN group_members gm ON g.id = gm.group_id 
-            WHERE gm.user_id = :userId
+            SELECT g.id_groupe, g.nom
+            FROM groupe g
+            JOIN inscrit i ON g.id_groupe = i.id_groupe
+            WHERE i.id_etudiant = :userId;
+
         ");
         $query->bindParam(':userId', $userId, PDO::PARAM_INT);
         $query->execute();
