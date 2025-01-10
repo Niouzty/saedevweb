@@ -1,6 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-class ModeleRessource {
+class ModeleProjet extends ModeleGenerique{
     public function sauvegarder($titre, $fichier) {
         $cheminDestination = __DIR__ . '/../../uploads/' . basename($fichier['name']);
 
@@ -17,4 +20,4 @@ class ModeleRessource {
         return false;
     }
 }
-?>
+

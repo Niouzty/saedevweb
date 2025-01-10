@@ -1,15 +1,21 @@
 <?php
-require_once 'modele_ressources.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-class ControleurRessource {
+require_once 'modele_projet.php';
+require_once "vue_projet.php";
+
+class ControleurProjet {
     private $modele;
 
     public function __construct() {
-        $this->modele = new ModeleRessource();
+        $this->modele = new ModeleProjet();
     }
 
-    public function afficherFormulaire() {
-        require_once 'vue_ressources.php';
+    public function afficherProjet() {
+        $vue = new VueProjet();
+        $vue->afficherProjet();
     }
 
     public function enregistrerRessource() {
