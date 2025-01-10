@@ -65,6 +65,7 @@ class VueEtudiant extends VueGenerique {
                         <td>Arts</td>
                         <td>Anglais</td>
                         <td>Mathématiques</td>
+                    
                         <td>Mathématiques</td>
                     </tr>
                     <tr>
