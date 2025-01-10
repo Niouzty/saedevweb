@@ -12,7 +12,7 @@ class VueEnseignant extends VueGenerique {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Accueil Enseignant</title>
-            <link rel="stylesheet" href="/public/css/style.css"> <!-- Lien vers le CSS -->
+            <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
         </head>
         <body>
             <!-- Barre de navigation -->
@@ -21,9 +21,9 @@ class VueEnseignant extends VueGenerique {
                 <div>
                     <a href="#">Home</a>
                     <a href="#">Ressources</a>
-                    <a href="index.php?module=mod_messagerie&action=groupes">Projet</a>
+                    <a href="index.php?module=mod_ressources&action=groupes">Projet</a>
                     <a href="#">Messagerie</a>
-                    <a href="#">Déconnexion</a>
+                    <a href="deconnexion.php">Déconnexion</a>
                 </div>
             </div>
 
