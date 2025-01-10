@@ -2,35 +2,34 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-//class VueUtilisateur extends VueGenerique {
-    //public function afficherPageAcceuil() {
+class VueEtudiant extends VueGenerique {
+  public function afficherPageAcceuil() {
         ?>
         <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil Enseignant</title>
-    <link rel="stylesheet" href="/public/css/style.css"> <!-- Lien vers le CSS -->
+    <title>Accueil Étudiant</title>
+    <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
 </head>
 <body>
     <!-- Barre de navigation -->
     <div class="navbar">
-        <img src="/public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
+        <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
         <div>
             <a href="#">Home</a>
             <a href="#">Texte</a>
             <a href="#">Texte</a>
-            <a href="#">Messagerie</a>
-            <a href="#">Déconnexion</a>
+            <a href="index.php?module=messagerie&action=groupes">Messagerie</a>
+            <a href="deconnexion.php">Déconnexion</a>
         </div>
     </div>
 
     <!-- Contenu principal -->
     <div class="container">
         <div class="emploi-du-temps">
-            <h1>Accueil Enseignant</h1>
+            <h1>Accueil Étudiant</h1>
             <h2>Jeudi 19 décembre 2024</h2>
             <table>
                 <thead>
@@ -105,5 +104,5 @@ error_reporting(E_ALL);
 </body>
 </html>
         <?php
-    //}
-//}
+  }
+}

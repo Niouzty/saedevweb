@@ -1,17 +1,15 @@
 <?php
+require_once "core/module_generique.php";
+require_once "controleur_messagerie.php";
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'modele_messagerie.php';
-require_once 'controleur_messagerie.php';
-require_once 'vue_messagerie.php';
-
-
 class ModuleMessagerie extends ModuleGenerique {
     public function __construct() {
         $this->controleur = new ControleurMessagerie();
-
+        echo var_dump($_GET['action']);
         if (isset($_GET['action'])) {
             switch ($_GET['action']) {
                 case 'groupes':
@@ -32,5 +30,7 @@ class ModuleMessagerie extends ModuleGenerique {
             $this->controleur->afficherGroupes();
         }
     }
+protected function creerControleur(){}
+protected function creerModele(){}
 }
 

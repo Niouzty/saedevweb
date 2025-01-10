@@ -9,11 +9,11 @@ class VueConnexion extends VueGenerique {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Connexion</title>
-            <link rel="stylesheet" href="/public/css/style.css"> <!-- Lien vers le CSS -->
+            <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
         </head>
         <body class="body-connexion">
             <div class="container">
-                <img src="/public/images/logo.png" alt="Logo IUT Montreuil" class="logo">
+                <img src="./public/images/logo.png" alt="Logo IUT Montreuil" class="logo">
                 <div class="login-form">
                     <h1>Connexion</h1>
                     <form action="?module=connexion&action=verifier" method="POST">

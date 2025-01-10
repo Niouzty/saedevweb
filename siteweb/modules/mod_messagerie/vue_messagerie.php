@@ -36,4 +36,3 @@ class VueMessagerie extends VueGenerique {
         </div>";
     }
 }
-

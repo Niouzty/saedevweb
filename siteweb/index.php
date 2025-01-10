@@ -4,16 +4,30 @@ ini_set('display_errors', 1);
 
 require_once "connexion.php";
 require_once "site.php";
+  require_once __DIR__ . '/core/module_generique.php';
+    require_once __DIR__ . '/core/modele_generique.php';
+    require_once __DIR__ . '/core/vue_generique.php';
+    require_once __DIR__ . '/templates/template.php';
 
 //Connexion::init_connexion();
-$site = new Site();
-$site->ajouterModule('connexion', 'modules/mod_connexion/module_connexion.php');
 
-// Redirection vers le module de connexion par défaut
-if (!isset($_GET['module'])) {
-    $_GET['module'] = 'connexion';
+
+
+if (isset($_GET['module'])) {
+            $module = $_GET['module'];
+            require_once 'modules/mod_'.$module.'/module_'.$module.'.php';
+            $classeModule = "Module" . ucfirst($module); // Exemple : "ModuleConnexion"
+            
+            if (class_exists($classeModule)) {
+                new $classeModule(); // Instancie et exécute le module
+            } else {
+                echo "Erreur : Module introuvable.";
+            }
+        } else {
+            // Module par défaut ou page d'accueil
+        $vue = new VueGenerique();
+        $vue->afficherPageAccueil();
+
 }
-
-$site->afficher();
 
 

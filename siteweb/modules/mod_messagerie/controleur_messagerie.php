@@ -1,7 +1,10 @@
 <?php
+require_once "modele_messagerie.php";
+require_once "vue_messagerie.php";
+session_start();
 class ControleurMessagerie {
     protected $modele;
-
+    
     public function __construct() {
         $this->modele = new ModeleMessagerie();
     }
