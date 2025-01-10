@@ -18,5 +18,15 @@ class ModuleEnseignant extends ModuleGenerique {
     protected function creerModele() {
         return new ModeleEnseignant(); // Supposons que vous avez une classe ModeleConnexion
     }
+
+    public function run($action) {
+        $controller = new ControleurEnseignant();
+
+        if (method_exists($controller, $action)) {
+            $controller->$action(); // Appelle l'action correspondante
+        } else {
+            echo "Erreur : Action '$action' introuvable.";
+        }
+    }
 }
 

@@ -21,7 +21,7 @@ class VueEnseignant extends VueGenerique {
                 <div>
                     <a href="#">Home</a>
                     <a href="#">Ressources</a>
-                    <a href="index.php?module=mod_ressources&action=groupes">Projet</a>
+                    <a href="index.php?module=projet">Projet</a>
                     <a href="#">Messagerie</a>
                     <a href="deconnexion.php">Déconnexion</a>
                 </div>

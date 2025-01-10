@@ -1,15 +1,15 @@
 <?php
-require_once 'modele_ressources.php';
+require_once 'modele_projet.php';
 
-class ControleurRessource {
+class ControleurProjet {
     private $modele;
 
     public function __construct() {
-        $this->modele = new ModeleRessource();
+        $this->modele = new ModeleProjet();
     }
 
     public function afficherFormulaire() {
-        require_once 'vue_ressources.php';
+        require_once 'vue_projet_ens.php';
     }
 
     public function enregistrerRessource() {
@@ -17,12 +17,14 @@ class ControleurRessource {
             $titre = $_POST['titre'] ?? '';
             $fichier = $_FILES['fichier'] ?? null;
 
-            if ($this->modele->sauvegarder($titre, $fichier)) {
+            if ($this->modele->sauvegarder($titre, $consignes, $semestre, $duree, $fichier)) {
                 echo "Ressource enregistrée avec succès !";
             } else {
                 echo "Erreur lors de l'enregistrement de la ressource.";
             }
         }
     }
+
+
 }
 ?>

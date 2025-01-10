@@ -15,11 +15,25 @@ require_once "site.php";
 
 if (isset($_GET['module'])) {
             $module = $_GET['module'];
-            require_once 'modules/mod_'.$module.'/module_'.$module.'.php';
+            $modulePath = 'modules/mod_' . $module . '/module_' . $module . '.php';
+            if (file_exists($modulePath)) {
+                require_once $modulePath;
+            } else {
+                echo "Erreur : Le fichier '$modulePath' est introuvable.";
+                exit;
+            }
             $classeModule = "Module" . ucfirst($module); // Exemple : "ModuleConnexion"
             
             if (class_exists($classeModule)) {
-                new $classeModule(); // Instancie et exécute le module
+                $action = $_GET['action'] ?? 'default';
+                $moduleInstance = new $classeModule();  // Instancie et exécute le module
+                
+                if (method_exists($moduleInstance, 'run')) {
+                    $moduleInstance->run($action); // Appelle la méthode run du module
+                } else {
+                    echo "Erreur : La méthode 'run' est introuvable dans le module $classeModule.";
+                }
+                
             } else {
                 echo "Erreur : Module introuvable.";
             }
@@ -27,6 +41,7 @@ if (isset($_GET['module'])) {
             // Module par défaut ou page d'accueil
         $vue = new VueGenerique();
         $vue->afficherPageAccueil();
+        
 
 }
 
