@@ -12,12 +12,12 @@ class VueEnseignant extends VueGenerique {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Accueil Enseignant</title>
-            <link rel="stylesheet" href="/public/css/style.css"> <!-- Lien vers le CSS -->
+            <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
         </head>
         <body>
             <!-- Barre de navigation -->
             <div class="navbar">
-                <img src="/public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
+                <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
                 <div>
                     <a href="#">Home</a>
                     <a href="#">Ressources</a>

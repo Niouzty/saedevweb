@@ -1,5 +1,5 @@
 <?php
-class ModeleEnseignant extends ModeleGenerique {
+class ModeleEtudiant extends ModeleGenerique {
     // modele ens
   
     

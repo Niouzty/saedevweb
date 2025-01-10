@@ -2,8 +2,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-//class VueUtilisateur extends VueGenerique {
-  //  public function afficherPageAcceuil() {
+class VueEtudiant extends VueGenerique {
+  public function afficherPageAcceuil() {
         ?>
         <!DOCTYPE html>
 <html lang="fr">
@@ -11,18 +11,18 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil Étudiant</title>
-    <link rel="stylesheet" href="/public/css/style.css"> <!-- Lien vers le CSS -->
+    <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
 </head>
 <body>
     <!-- Barre de navigation -->
     <div class="navbar">
-        <img src="/public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
+        <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
         <div>
             <a href="#">Home</a>
             <a href="#">Texte</a>
             <a href="#">Texte</a>
-            <a href="/index.php?module=messagerie&action=groupes">Messagerie</a>
-            <a href="#">Déconnexion</a>
+            <a href="index.php?module=messagerie&action=groupes">Messagerie</a>
+            <a href="deconnexion.php">Déconnexion</a>
         </div>
     </div>
 
@@ -104,5 +104,5 @@ error_reporting(E_ALL);
 </body>
 </html>
         <?php
-   // }
-//}
+  }
+}

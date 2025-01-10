@@ -34,7 +34,7 @@ class ControleurConnexion {
                 if ($utilisateur['role'] === 'enseignant') {
                     header('Location: index.php?module=enseignant'); // Page d'accueil de l'enseignant
                 } else {
-                    header('Location: /modules/mod_utilisateur/vue_utilisateur-etudiant.php'); // Page d'accueil de l'étudiant
+                    header('Location: index.php?module=etudiant'); // Page d'accueil de l'étudiant
                 }
                 exit; // S'assurer qu'aucun autre code ne soit exécuté après la redirection
             }
