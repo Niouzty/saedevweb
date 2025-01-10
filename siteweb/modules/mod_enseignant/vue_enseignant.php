@@ -17,7 +17,7 @@ class VueEnseignant extends VueGenerique {
         <body>
             <!-- Barre de navigation -->
             <div class="navbar">
-                <img src="/public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
+                <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
                 <div>
                     <a href="#">Home</a>
                     <a href="#">Ressources</a>

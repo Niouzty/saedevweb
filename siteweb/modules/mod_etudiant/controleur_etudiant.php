@@ -1,7 +1,7 @@
 <?php
 require_once 'modules/mod_etudiant/vue_etudiant.php';
 
-class ControleurEnseignant {
+class ControleurEtudiant {
     protected $modele;
 
     public function __construct() {
