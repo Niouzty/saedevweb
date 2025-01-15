@@ -21,7 +21,7 @@ class VueEtudiant extends VueGenerique {
             <a href="#">Home</a>
             <a href="#">Texte</a>
             <a href="#">Texte</a>
-            <a href="index.php?module=messagerie&action=groupes">Messagerie</a>
+            <a href="index.php?module=messagerie&action=conversations">Messagerie</a>
             <a href="deconnexion.php">Déconnexion</a>
         </div>
     </div>

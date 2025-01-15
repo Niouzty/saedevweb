@@ -9,28 +9,46 @@ error_reporting(E_ALL);
 class ModuleMessagerie extends ModuleGenerique {
     public function __construct() {
         $this->controleur = new ControleurMessagerie();
+
+        // Debugging : Affichage de l'action
         echo var_dump($_GET['action']);
+        
+        // Vérification de l'action
         if (isset($_GET['action'])) {
             switch ($_GET['action']) {
-                case 'groupes':
-                    $this->controleur->afficherGroupes();
+                case 'conversations':
+                    // Afficher les conversations de l'utilisateur
+                    $this->controleur->afficherConversations();
                     break;
                 case 'messages':
-                    if (isset($_GET['group_id'])) {
-                        $this->controleur->afficherMessages($_GET['group_id']);
+                    // Afficher les messages d'une conversation
+                    if (isset($_GET['conversation_id'])) {
+                        $this->controleur->afficherMessages($_GET['conversation_id']);
                     }
                     break;
                 case 'envoyer':
+                    // Envoyer un message dans une conversation
                     $this->controleur->envoyerMessage();
                     break;
+                case 'creer':
+                    // Créer une nouvelle conversation
+                    $this->controleur->creerConversation();
+                    break;
+                case 'messages_ajax':
+                    if (isset($_GET['conversation_id'])) {
+                        $this->controleur->afficherMessagesAjax($_GET['conversation_id']);
+                    }
+                        break;
                 default:
                     echo "Action non reconnue.";
             }
         } else {
-            $this->controleur->afficherGroupes();
+            // Par défaut, afficher les conversations
+            $this->controleur->afficherConversations();
         }
     }
-protected function creerControleur(){}
-protected function creerModele(){}
-}
 
+    protected function creerControleur() {}
+    protected function creerModele() {}
+}
+?>
