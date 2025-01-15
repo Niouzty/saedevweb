@@ -324,4 +324,63 @@ h1 {
 .messagerie-send-button:hover {
     background-color: #0056b3;
 }
+/*
+/* Style global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barre de navigation générale */
+.navbar-projet {
+    background-color: #007bff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.navbar-projet img {
+    width: 150px; /* Taille du logo */
+}
+
+.navbar-projet div {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-projet a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-projet a:hover {
+    background-color: #0056b3;
+}
+
+/* Section de contenu */
+.content-projet {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+
 

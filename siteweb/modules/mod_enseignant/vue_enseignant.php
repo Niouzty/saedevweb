@@ -27,6 +27,7 @@ class VueEnseignant extends VueGenerique {
                 </div>
             </div>
 
+
             <!-- Contenu principal -->
             <div class="container">
                 <div class="emploi-du-temps">
