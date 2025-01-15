@@ -20,7 +20,7 @@ class ModeleProjet {
         $connexion = Connexion::getBdd();
 
         try {
-            $query = $connexion->prepare("INSERT INTO rendu (id_rendu, type, date_limite) VALUES (?, ?, ?)");
+            $query = $connexion->prepare("INSERT INTO rendu (id_rendu, id_projet, date_depot) VALUES (?, ?, ?)");
             $query->execute([$titre, $description, $dateLimite]);
             return true;
         } catch (PDOException $e) {

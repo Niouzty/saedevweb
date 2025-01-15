@@ -33,7 +33,7 @@ class ControleurProjet {
                 $message = "Erreur lors de l'enregistrement du projet.";
             }
             ob_start();
-            require_once 'pages/vue_projet.php';
+            require_once 'vue_projet.php';
             $content = ob_get_clean();
 
             require_once 'pages/vue_projet_form.php'; // Formulaire de projet avec message de succès
