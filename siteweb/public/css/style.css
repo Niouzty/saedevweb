@@ -1,8 +1,124 @@
-.body-connexion {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+/* Header */
+.home-header-container {
+    background-color: #2C3E50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.home-site-title {
     margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.home-main-nav {
+    margin-top: 15px;
+}
+
+.home-nav-link {
+    font-size: 1.1rem;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498DB;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.home-nav-link:hover {
+    background-color: #2980B9;
+    transform: scale(1.05);
+}
+
+.home-nav-link:active {
+    background-color: #1A5276;
+}
+
+/* Main Content */
+.home-main-content {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-infos-section {
+    margin-bottom: 30px;
+}
+
+.home-section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.home-info-list {
+    list-style-type: none;
     padding: 0;
+}
+
+.home-info-item {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.home-info-item::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.5rem;
+    color: #3498DB;
+}
+
+/* Footer */
+.home-footer-container {
+    background-color: #34495E;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.home-footer-text {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-site-title {
+        font-size: 2rem;
+    }
+
+    .home-nav-link {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .home-main-content {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .home-section-title {
+        font-size: 1.6rem;
+    }
+
+    .home-info-item {
+        font-size: 1rem;
+    }
+}
+
+.body-connexion {
+    background-color: #f9f9f9;
 }
 
 .container {
@@ -12,47 +128,91 @@
 
 .logo {
     width: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
 }
 
 .login-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
     display: inline-block;
 }
 
 .login-form h1 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
+    color: #333;
 }
 
-.login-form label {
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
     display: block;
     font-weight: bold;
-    margin: 10px 0 5px;
+    margin-bottom: 8px;
+    color: #333;
 }
 
-.login-form input {
+.input-group input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 12px;
+    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.login-form button {
-    background: #000;
+.input-group input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+    outline: none;
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #4CAF50;
     color: #fff;
-    padding: 10px 20px;
+    font-size: 18px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.login-form button:hover {
-    background: #333;
+.login-btn:hover {
+    background-color: #45a049;
+}
+
+.extra-links {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.extra-links a {
+    color: #4CAF50;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.extra-links a:hover {
+    color: #388E3C;
 }
 
 /* Style global */

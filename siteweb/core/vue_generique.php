@@ -1,12 +1,28 @@
 <?php
 class VueGenerique {
     public function afficherPageAccueil() {
-        Template::afficherEnTete("Page d'accueil");
-        echo "<main>
-    <h2>Bienvenue sur la page d'accueil</h2>
-    <p>Ceci est un exemple de contenu de page.</p>
-</main>";
+
+      
+        // Appel des méthodes pour afficher l'en-tête et le pied de page
+        Template::afficherEnTete("Moodle");
+        ?>
+
+        <main class='home-main-content'>
+            <section id="infos" class='home-infos-section'>
+                <h2 class='home-section-title'>Pourquoi utiliser cette plateforme ?</h2>
+                <ul class='home-info-list'>
+                    <li class='home-info-item'>Suivi des projets simplifié</li>
+                    <li class='home-info-item'>Communication fluide entre étudiants et enseignants</li>
+                    <li class='home-info-item'>Outils collaboratifs intégrés</li>
+                </ul>
+            </section>
+        </main>
+
+        <?php
         Template::afficherPiedDePage();
+       
+
+
     }
 
     public function afficherPageErreur($message = "Une erreur est survenue.") {

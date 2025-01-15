@@ -10,21 +10,24 @@ class Template {
     <link rel='stylesheet' href='public/css/style.css'>
 </head>
 <body>
-<header>
-    <h1>{$titre}</h1>
-    <nav>
-        <a href='?module=connexion'>Connexion</a>
-    </nav>
-</header>";
+<div class='home-header-container'>
+    <header>
+        <h1 class='home-site-title'>{$titre}</h1>
+        <nav class='home-main-nav'>
+            <a href='?module=connexion' class='home-nav-link'>Go !</a>
+        </nav>
+    </header>
+</div>";
     }
 
     public static function afficherPiedDePage() {
-        echo "<footer>
-    <p>&copy; " . date('Y') . " Mon Site. Tous droits réservés.</p>
-</footer>
+        echo "<div class='home-footer-container'>
+    <footer>
+        <p class='home-footer-text'>&copy; " . date('Y') . " Mon Site. Tous droits réservés.</p>
+    </footer>
+</div>
 </body>
 </html>";
     }
 }
 ?>
-
