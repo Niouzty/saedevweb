@@ -1,20 +1,47 @@
 <?php
 
 class ModeleProjet {
-    public function sauvegarder($titre, $fichier) {
-        $cheminDestination = __DIR__ . '/../../uploads/' . basename($fichier['nom']);
 
-        // Vérifie que le répertoire des uploads existe, sinon le crée
-        if (!is_dir(dirname($cheminDestination))) {
-            mkdir(dirname($cheminDestination), 0755, true);
-        }
+    public function sauvegarder($titre, $description, $annee, $semestre, $intervenants) {
+    // Connexion à la base de données
+        $connexion = Connexion::getBdd();
 
-        if (move_uploaded_file($fichier['nom'], $cheminDestination)) {
-            // Ici, vous pouvez ajouter un enregistrement en base de données
+        try {
+            // Insertion du projet
+            $query = $connexion->prepare("INSERT INTO projet (nom, description, annee, semestre) VALUES (?, ?, ?, ?)");
+            $query->execute([$titre, $description, $annee, $semestre]);
+
+            $projetId = $connexion->lastInsertId();
+
+            // Attribution des intervenants au projet
+            $queryIntervenants = $connexion->prepare("INSERT INTO est_intervenant (id_projet, id_intervenant) VALUES (?, ?)");
+            foreach ($intervenants as $intervenantId) {
+                $queryIntervenants->execute([$projetId, $intervenantId]);
+            }
+
             return true;
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage();
+            return false;
         }
-
-        return false;
     }
+
+    public function getEtudiants() {
+        $connexion = Connexion::getBdd();
+        $query = $connexion->prepare("SELECT * FROM etudiant");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getStatistiques() {
+        $connexion = Connexion::getBdd();
+        $query = $connexion->prepare("
+            SELECT etudiant.nom, AVG(evaluation.note) AS moyenne
+            FROM etudiant
+            JOIN evaluation ON etudiant.id_etudiant = evaluation.id_evaluation
+            GROUP BY etudiant.nom");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }  
 }
 ?>

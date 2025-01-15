@@ -1,20 +1,27 @@
 <?php
+require_once 'modele_projet.php';
+require_once 'controleur_projet.php';
+require_once 'vue_projet.php';
 
 class ModuleProjet {
     public function run($action) {
-        require_once 'controleur_projet.php';
-        $controller = new ControleurProjet();
+        $controleur = new ControleurProjet();
 
-        if (method_exists($controller, $action)) {
-            $controller->$action();
-        } else {
-            $this->default();
+        switch ($action) {
+            case 'afficher':
+                $controleur->afficherFormulaire();
+                break;
+            case 'listeEtudiants':
+                $controleur->listerEtudiants();
+                break;
+            case 'statistiquesEtudiants':
+                $controleur->afficherStatistiques();
+                break;
+            default:
+                echo "Action inconnue.";
+                break;
         }
     }
-
-    public function default() {
-        $controller = new ControleurProjet();
-        $controller->afficherFormulaire();
-    }
 }
+
 ?>
