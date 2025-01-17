@@ -18,6 +18,34 @@ class Template {
 </header>";
     }
 
+
+    public static function afficherNavigationEtudiant() {
+        echo '<div class="navbar">
+            <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
+            <div>
+                <a href="#">Home</a>
+                <a href="#">Texte</a>
+                <a href="index.php?module=projet&action=projets">Projets</a>
+                <a href="index.php?module=messagerie&action=conversations">Messagerie</a>
+                <a href="deconnexion.php">Déconnexion</a>
+            </div>
+        </div>';
+    }
+    
+    public static function afficherNavigationEnseignant() {
+        echo '<div class="navbar">
+            <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
+            <div>
+                <a href="#">Home</a>
+                <a href="#">Texte</a>
+                <a href="index.php?module=projet&action=projets">Projets</a>
+                <a href="index.php?module=messagerie&action=conversations">Messagerie</a>
+                <a href="deconnexion.php">Déconnexion</a>
+            </div>
+        </div>';
+    }
+    
+
     public static function afficherPiedDePage() {
         echo "<footer>
     <p>&copy; " . date('Y') . " Mon Site. Tous droits réservés.</p>

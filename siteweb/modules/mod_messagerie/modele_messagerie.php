@@ -1,42 +1,60 @@
 <?php
 class ModeleMessagerie extends ModeleGenerique {
-    // Récupérer les groupes d'un utilisateur
-    public function getGroupes($userId) {
+
+    // Créer une nouvelle conversation
+    public function createConversation($idGroupe, $titre = 'Discussion de groupe') {
         $query = $this->bdd->prepare("
-            SELECT g.id, g.name 
-            FROM groups g 
-            JOIN group_members gm ON g.id = gm.group_id 
-            WHERE gm.user_id = :userId
+            INSERT INTO conversation (id_groupe, titre, date_creation) 
+            VALUES (:idGroupe, :titre, NOW())
+        ");
+        $query->bindParam(':idGroupe', $idGroupe, PDO::PARAM_INT);
+        $query->bindParam(':titre', $titre, PDO::PARAM_STR);
+        $query->execute();
+    
+        return $this->bdd->lastInsertId(); // Retourne l'ID de la nouvelle conversation
+    }
+    
+
+    // Récupérer les conversations
+    public function getConversations($userId) {
+        $query = $this->bdd->prepare("
+            SELECT DISTINCT c.id_conversation, c.titre
+        FROM conversation c
+        JOIN inscrit i ON i.id_groupe = c.id_groupe
+        WHERE i.id_etudiant = :userId
         ");
         $query->bindParam(':userId', $userId, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    
 
-    // Récupérer les messages d'un groupe
-    public function getMessages($groupId) {
+    // Récupérer les messages
+    public function getMessages($conversationId) {
         $query = $this->bdd->prepare("
-            SELECT m.content, m.created_at, u.name 
-            FROM messages m 
-            JOIN users u ON m.user_id = u.id 
-            WHERE m.group_id = :groupId 
-            ORDER BY m.created_at ASC
+            SELECT m.contenu, m.date_envoi, m.id_etudiant, m.id_enseignant
+            FROM message m
+            WHERE m.id_conversation = :conversationId
+            ORDER BY m.date_envoi ASC
         ");
-        $query->bindParam(':groupId', $groupId, PDO::PARAM_INT);
+        $query->bindParam(':conversationId', $conversationId, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Envoyer un message dans un groupe
-    public function sendMessage($groupId, $userId, $content) {
+    // Envoyer un message
+    public function sendMessage($conversationId, $userId, $content) {
         $query = $this->bdd->prepare("
-            INSERT INTO messages (group_id, user_id, content, created_at) 
-            VALUES (:groupId, :userId, :content, NOW())
+            INSERT INTO message (id_conversation, id_etudiant, id_enseignant, contenu)
+            VALUES (:conversationId, :userId, NULL, :content)
         ");
-        $query->bindParam(':groupId', $groupId, PDO::PARAM_INT);
+        $query->bindParam(':conversationId', $conversationId, PDO::PARAM_INT);
         $query->bindParam(':userId', $userId, PDO::PARAM_INT);
         $query->bindParam(':content', $content, PDO::PARAM_STR);
-        return $query->execute();
+        $query->execute();
     }
 }
+?>
+
 
