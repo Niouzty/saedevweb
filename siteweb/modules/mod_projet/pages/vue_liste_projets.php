@@ -1,8 +1,7 @@
-<div class="liste">
-    <h1>Liste des projets</h1>
-    <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
-    <table>
-        <thead>
+<div class="container mt-5">
+    <h1 class="text-center">Liste des projets</h1>
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
@@ -23,4 +22,9 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+
+<?php if (!empty($message)) { ?>
+        <p class="message"><?= $message ?></p>
+    <?php } ?>
 </div>
