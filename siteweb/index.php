@@ -14,21 +14,36 @@ require_once "site.php";
 
 
 if (isset($_GET['module'])) {
-            $module = $_GET['module'];
-            require_once 'modules/mod_'.$module.'/module_'.$module.'.php';
-            
-            $classeModule = "Module" . ucfirst($module); // Exemple : "ModuleConnexion"
-            
-            if (class_exists($classeModule)) {
-                new $classeModule(); // Instancie et exécute le module
-            } else {
-                echo "Erreur : Module introuvable.";
-            }
-        } else {
-            // Module par défaut ou page d'accueil
-        $vue = new VueGenerique();
-        $vue->afficherPageAccueil();
+    $module = $_GET['module']; // Exemple : "projet"
+    $role = $_GET['role'] ?? null;  // Récupère le rôle si spécifié (enseignant, étudiant)
 
+    // Définir le chemin du fichier du module
+    $basePath = 'modules/mod_' . $module . '/';  // Dossier du module spécifique
+    $filePath = $basePath . 'module_' . $module . ($role ? '_' . $role : '') . '.php'; // Exemple : "module_projet_enseignant.php" ou "module_projet.php"
+
+    if (file_exists($filePath)) {
+        require_once $filePath;  // Inclure le fichier correspondant
+
+        // Générer dynamiquement le nom de la classe du module
+        $classeModule = "Module" . ucfirst($module);  // Exemple : "ModuleProjet"
+        if ($role) {
+            $classeModule .= ucfirst($role);  // Exemple : "ModuleProjetEnseignant"
+        }
+
+        if (class_exists($classeModule)) {
+            new $classeModule();  // Instancie et exécute le module
+        } else {
+            echo "Erreur : Classe introuvable pour le module.";
+        }
+    } else {
+        echo "Erreur : Fichier du module introuvable.";
+    }
+} else {
+    // Module par défaut ou page d'accueil
+    $vue = new VueGenerique();
+    $vue->afficherPageAccueil();  // Afficher la page d'accueil
 }
+
+
 
 
