@@ -3,9 +3,9 @@ class Connexion {
     protected static $bdd;
 
     public static function init_connexion() {
-        $dsn = "mysql:host=localhost;dbname=saemanager";
-        $user = "root";
-        $password = "";
+        $dsn = "mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201622";
+        $user = "dutinfopw201622";
+        $password = "najymahe";
 
         try {
             self::$bdd = new PDO($dsn, $user, $password, [

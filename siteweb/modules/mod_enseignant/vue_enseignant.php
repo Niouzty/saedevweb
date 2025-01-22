@@ -6,17 +6,13 @@ error_reporting(E_ALL);
 class VueEnseignant extends VueGenerique {
     public function afficherPageAcceuil() {
         ?>
-        <!DOCTYPE html>
-        <html lang="fr">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Accueil Enseignant</title>
-            <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
-        </head>
-        <body>
+        
             <!-- Barre de navigation -->
-            <div class="navbar">
+            <?php 
+            Template::afficherNavigationEnseignant();
+            ?>
+
+            <!--<div class="navbar">
                 <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
                 <div>
                     <a href="#">Home</a>
@@ -25,7 +21,7 @@ class VueEnseignant extends VueGenerique {
                     <a href="#">Messagerie</a>
                     <a href="#">Déconnexion</a>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Contenu principal -->
             <div class="container">

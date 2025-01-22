@@ -30,53 +30,108 @@ class ControleurProjetEnseignant {
         $vue->afficherListeRendus($rendus); // Appelle la vue pour afficher les rendus
     }
 
+    public function afficherRessources($idProjet) {
+        $vue = new VueProjetEnseignant();
+        $ressources = $this->modele->getRessourcesByProjet($idProjet);
+        $vue->afficherRessources($ressources, $idProjet);
+    }
+
+    public function ajouterRessource($idProjet) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $type = $_POST['type'] ?? 'fichier'; // Par défaut, type "fichier"
+            $miseEnAvant = isset($_POST['mise_en_avant']) ? true : false;
+    
+            // Chemin vers le dossier "fichier" du module
+            $uploadDir = __DIR__ . '/fichier/';
+            if (!is_dir($uploadDir)) {
+                if (!mkdir($uploadDir, 0755, true)) {
+                    die("Erreur : Impossible de créer le dossier $uploadDir.");
+                }
+            }
+    
+            // Gestion du fichier envoyé
+            if (!empty($_FILES['chemin_contenu']['name'])) {
+                $chemin = $uploadDir . basename($_FILES['chemin_contenu']['name']);
+                if (move_uploaded_file($_FILES['chemin_contenu']['tmp_name'], $chemin)) {
+                    // Insérer les détails dans la base de données
+                    if ($this->modele->ajouterRessource($idProjet, $type, 'modules/mod_projet_enseignant/fichier/' . basename($_FILES['chemin_contenu']['name']), $miseEnAvant)) {
+                        header("Location: ?module=projet_enseignant&action=ressources&projet_id=$idProjet");
+                        exit;
+                    } else {
+                        echo "Erreur lors de l'ajout de la ressource à la base de données.";
+                    }
+                } else {
+                    echo "Erreur lors de l'upload du fichier.";
+                }
+            } else {
+                echo "Veuillez sélectionner un fichier.";
+            }
+        }
+    }
+
+    // Supprimer une ressource
+    public function supprimerRessource($idRessource, $idProjet) {
+        if ($this->modele->supprimerRessource($idRessource)) {
+            header("Location: ?module=projet_enseignant&action=ressources&projet_id=$idProjet");
+            exit;
+        } else {
+            echo "Erreur lors de la suppression de la ressource.";
+        }
+    }
+
+    // Modifier la mise en avant
+    public function modifierMiseEnAvant($idRessource, $idProjet, $miseEnAvant) {
+        if ($this->modele->modifierMiseEnAvant($idRessource, $miseEnAvant)) {
+            header("Location: ?module=projet_enseignant&action=ressources&projet_id=$idProjet");
+            exit;
+        } else {
+            echo "Erreur lors de la mise à jour.";
+        }
+    }
+
     // Créer un nouveau projet
     public function creerProjet() {
         $vue = new VueProjetEnseignant();
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupération des données du formulaire
             $titre = $_POST['titre'] ?? '';
             $description = $_POST['description'] ?? '';
             $annee = $_POST['annee'] ?? '';
             $semestre = $_POST['semestre'] ?? '';
-            $intervenants = $_POST['intervenants'] ?? [];
-            $ressources = $_FILES['ressources'] ?? null;
+            $intervenants = $_POST['intervenants'] ?? []; // Récupère les enseignants sélectionnés
+            $ressources = $_FILES['ressources'] ?? [];
     
-            // Création du projet
-            $idProjet = $this->modele->sauvegarderProjet($titre, $description, $annee, $semestre);
+            // Sauvegarder le projet
+            $projetId = $this->modele->sauvegarderProjet($titre, $description, $annee, $semestre);
     
-            if ($idProjet) {
-                // Association des intervenants au projet
+            if ($projetId) {
+                // Sauvegarder les enseignants intervenants
                 foreach ($intervenants as $idEnseignant) {
-                    $this->modele->associerIntervenant($idProjet, $idEnseignant);
+                    $this->modele->attribuerIntervenant($projetId, $idEnseignant);
                 }
     
-                // Téléchargement et association des ressources
-                if ($ressources && is_array($ressources['name'])) {
-                    for ($i = 0; $i < count($ressources['name']); $i++) {
-                        if ($ressources['error'][$i] === UPLOAD_ERR_OK) {
-                            $cheminFichier = 'uploads/' . basename($ressources['name'][$i]);
-                            if (move_uploaded_file($ressources['tmp_name'][$i], $cheminFichier)) {
-                                $this->modele->ajouterRessource($ressources['name'][$i], $idProjet, $cheminFichier);
-                            }
+                // Sauvegarder les ressources
+                foreach ($ressources['name'] as $index => $name) {
+                    if ($ressources['error'][$index] === UPLOAD_ERR_OK) {
+                        $chemin = 'uploads/' . basename($ressources['name'][$index]);
+                        if (move_uploaded_file($ressources['tmp_name'][$index], $chemin)) {
+                            $this->modele->ajouterRessource($projetId, $chemin);
                         }
                     }
                 }
     
-                // Redirection après succès
                 header("Location: ?module=projet_enseignant&action=projets");
                 exit;
             } else {
                 $vue->afficherMessage("Erreur lors de la création du projet.", "danger");
             }
         } else {
-            // Chargement des enseignants et affichage du formulaire
+            // Récupérer les enseignants pour le formulaire
             $enseignants = $this->modele->getEnseignants();
-            $ressources = $this->modele->getRessources();
-            $vue->afficherFormulaireProjet($enseignants, $ressources);
+            $vue->afficherFormulaireProjet($enseignants, []);
         }
     }
+    
     
 
     // Créer un nouveau rendu

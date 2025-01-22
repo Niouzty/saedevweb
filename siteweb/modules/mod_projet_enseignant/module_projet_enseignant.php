@@ -20,6 +20,22 @@ class ModuleProjetEnseignant extends ModuleGenerique {
                         echo "ID du projet manquant.";
                     }
                     break;
+                case 'ressources':
+                    if (isset($_GET['projet_id'])) {
+                        $projetId = intval($_GET['projet_id']);
+                        $this->controleur->afficherRessources($projetId);
+                    } else {
+                        echo "ID du projet manquant pour afficher les ressources.";
+                    }
+                    break;
+                case 'ajouterRessource':
+                    if (isset($_GET['projet_id'])) {
+                        $projetId = intval($_GET['projet_id']);
+                        $this->controleur->ajouterRessource($projetId);
+                    } else {
+                        echo "ID du projet manquant pour ajouter une ressource.";
+                    }
+                    break;
                 case 'creerProjet':
                     $this->controleur->creerProjet();
                     break;
