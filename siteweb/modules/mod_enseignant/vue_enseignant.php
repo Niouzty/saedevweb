@@ -20,8 +20,8 @@ class VueEnseignant extends VueGenerique {
                 <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
                 <div>
                     <a href="#">Home</a>
-                    <a href="#">Ressources</a>
-                    <a href="index.php?module=mod_messagerie&action=groupes">Projet</a>
+                    <a href="#">Groupe</a>
+                    <a href="index.php?module=projet_enseignant&action=projets">Projet</a>
                     <a href="#">Messagerie</a>
                     <a href="#">Déconnexion</a>
                 </div>
