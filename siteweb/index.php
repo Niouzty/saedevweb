@@ -4,46 +4,49 @@ ini_set('display_errors', 1);
 
 require_once "connexion.php";
 require_once "site.php";
-  require_once __DIR__ . '/core/module_generique.php';
-    require_once __DIR__ . '/core/modele_generique.php';
-    require_once __DIR__ . '/core/vue_generique.php';
-    require_once __DIR__ . '/templates/template.php';
-
-//Connexion::init_connexion();
-
-
+require_once __DIR__ . '/core/module_generique.php';
+require_once __DIR__ . '/core/modele_generique.php';
+require_once __DIR__ . '/core/vue_generique.php';
+require_once __DIR__ . '/templates/template.php';
 
 if (isset($_GET['module'])) {
-    $module = $_GET['module']; // Exemple : "projet"
-    $role = $_GET['role'] ?? null;  // Récupère le rôle si spécifié (enseignant, étudiant)
+    $module = $_GET['module']; // Exemple : "mod_projet_enseignant" ou "projet"
+    $role = $_GET['role'] ?? null; // Récupère le rôle (enseignant, étudiant)
 
-    // Définir le chemin du fichier du module
-    $basePath = 'modules/mod_' . $module . '/';  // Dossier du module spécifique
-    $filePath = $basePath . 'module_' . $module . ($role ? '_' . $role : '') . '.php'; // Exemple : "module_projet_enseignant.php" ou "module_projet.php"
+    // Corrige la construction du chemin pour éviter les doublons "mod_"
+    if (strpos($module, 'mod_') === 0) {
+        $basePath = 'modules/' . $module . '/';
+        $filePath = $basePath . 'module_' . substr($module, 4) . ($role === 'enseignant' ? '_enseignant' : '') . '.php';
+    } else {
+        $basePath = 'modules/mod_' . $module . '/';
+        $filePath = $basePath . 'module_' . $module . ($role === 'enseignant' ? '_enseignant' : '') . '.php';
+    }
+
+    // Debugging : Afficher les chemins calculés
+    echo "Module : $module<br>";
+    echo "Chemin recherché : $filePath<br>";
 
     if (file_exists($filePath)) {
-        require_once $filePath;  // Inclure le fichier correspondant
+        require_once $filePath;
 
-        // Générer dynamiquement le nom de la classe du module
-        $classeModule = "Module" . ucfirst($module);  // Exemple : "ModuleProjet"
-        if ($role) {
-            $classeModule .= ucfirst($role);  // Exemple : "ModuleProjetEnseignant"
+        // Générer dynamiquement le nom de la classe
+        $classeModule = "Module" . str_replace('_', '', ucwords(str_replace('mod_', '', $module), '_'));
+        if ($role === 'enseignant') {
+            $classeModule .= 'Enseignant';
         }
+
+        echo "Classe attendue : $classeModule<br>";
 
         if (class_exists($classeModule)) {
-            new $classeModule();  // Instancie et exécute le module
+            new $classeModule();
         } else {
-            echo "Erreur : Classe introuvable pour le module.";
+            die("Erreur : Classe $classeModule non trouvée dans $filePath");
         }
     } else {
-        echo "Erreur : Fichier du module introuvable.";
+        die("Erreur : Fichier du module introuvable. Chemin recherché : $filePath");
     }
 } else {
     // Module par défaut ou page d'accueil
     $vue = new VueGenerique();
-    $vue->afficherPageAccueil();  // Afficher la page d'accueil
+    $vue->afficherPageAccueil();
 }
-
-
-
-
