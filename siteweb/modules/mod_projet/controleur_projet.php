@@ -30,21 +30,31 @@ class ControleurProjet {
     }
 
     public function deposerRendu() {
-        // Vérification de l'upload
-        if (isset($_FILES['fichier'])) {
-            $fichier = $_FILES['fichier'];
-            $cheminCible = __DIR__ . '/uploads/' . basename($fichier['name']);
+        if (isset($_FILES['fichier']) && $_FILES['fichier']['error'] === UPLOAD_ERR_OK) {
+            $dossierCible = '/home/etudiants/info/epembelefuala/uploads/';
+            
+
+            // Vérifier si le dossier existe, sinon le créer
+            if (!is_dir($dossierCible)) {
+                mkdir($dossierCible, 0775, true);
+            }
+            
+            // Nettoyer le nom du fichier pour éviter les caractères spéciaux
+            $nomFichier = preg_replace('/[^a-zA-Z0-9._-]/', '_', $_FILES['fichier']['name']);
+            
+            // Définir le chemin cible dans le dossier 'uploads'
+            $cheminCible = $dossierCible . $nomFichier;
     
-            if (move_uploaded_file($fichier['tmp_name'], $cheminCible)) {
-                // Sauvegarde du rendu dans la base de données
-                $this->modele->saveRendu($projetId, $userId, $cheminCible);
-                header("Location: ?module=projet&action=rendus&projet_id=$projetId");
-                exit;
+            // Déplacement du fichier dans le dossier cible
+            if (move_uploaded_file($_FILES['fichier']['tmp_name'], $cheminCible)) {
+                echo "Fichier uploadé avec succès.";
             } else {
-                echo "Erreur lors de l'upload du fichier.";
+                echo "Erreur lors du déplacement du fichier.";
             }
         } else {
-            echo "Aucun fichier sélectionné.";
+            echo "Erreur : " . ($_FILES['fichier']['error'] ?? "Aucun fichier reçu.");
         }
     }
+    
+    
 }
