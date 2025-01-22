@@ -1,0 +1,88 @@
+TD1 - Les fonctions et les procédures
+1)
+create or replace function pjeune(OUT age_min int) AS $$
+begin 
+ select min(age) INTO age_min from vac.pers;
+END; 
+$$language plpgsql;
+CREATE FUNCTION
+jexume=> select pjeune();
+ pjeune 
+--------
+     15
+(1 row)
+
+2)
+ create or replace function nbetoile(in id int) RETURNS INT AS $$ DECLARE nbetoile int;
+BEGIN
+select etoile into nbetoile from vac.club where idclub = id; RETURN nbetoile;  
+END; $$ language plpgsql;
+CREATE FUNCTION
+jexume=> select nbetoile(31);
+ nbetoile 
+----------
+        4
+(1 row)
+
+3)
+CREATE OR REPLACE FUNCTION captotale (ville_nom VARCHAR) returns int AS
+$$
+begin
+return sum(capacite)
+from vac.club 
+where ville_nom = ville; 
+end; 
+$$ language plpgsql;
+select captotale('Narbonne');
+
+4)
+create or replace function aréservé(id_grp int) returns boolean AS
+$$
+BEGIN
+return exists (select idgrp 
+				from vac.resa
+				where id_grp = idgrp);
+end;
+$$ language plpgsql; 
+
+5)
+create or replace function actpratiquée(id_grp int, mois_resa varchar) returns varchar AS $$
+declare act varchar;
+BEGIN
+select activite into act
+from vac.groupe
+where id_grp = idgrp;
+if (not found)then
+act = 'pas d'activite';
+end if;
+return act;
+end;
+$$ language plpgsql;
+
+6)
+create or replace function idplusun() returns int as $$
+declare plus int;
+begin
+select max(idpers) into plus
+from vac.pers; 
+return plus + 1;
+end;
+$$ language plpgsql;
+
+Procédure
+1)
+create or replace procedure insepers(nom_ville varchar, age int, ville varchar) as $$
+begin
+if (ville ='') then
+	ville :='Paris';
+end if;
+insert into vac.pers values(idplusun(), nom, age, ville);
+end;
+$$ language plpgsql;
+
+create or replace procedure supclub(id_club int) as $$
+begin
+delete from vac.club where idclub = id_club;
+delete from vac.resa where idclub = id_club;
+end;
+$$ language plpgsql; 
