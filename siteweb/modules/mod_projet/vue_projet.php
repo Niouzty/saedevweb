@@ -1,26 +1,6 @@
 <?php
 class VueProjet extends VueGenerique{
-    /*
-    public function afficherProjets($projets) {
-        ?>
-        <div class="projets-container">
-            <h1>Liste des Projets</h1>
-            <ul>
-                <?php foreach ($projets as $projet): ?>
-                    <li>
-                        <a href="?module=projet&action=rendus&projet_id=<?= $projet['id_projet']; ?>">
-                            <?= htmlspecialchars($projet['nom']); ?>
-                        </a>
-                        <p><?= htmlspecialchars($projet['description']); ?></p>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php
-    }
-        */
-
-
+    
     public function afficherProjets($projets) {
         ?>
         <!DOCTYPE html>
