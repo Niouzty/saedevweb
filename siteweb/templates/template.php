@@ -20,29 +20,68 @@ class Template {
 
 
     public static function afficherNavigationEtudiant() {
-        echo '<div class="navbar">
-            <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
-            <div>
-                <a href="#">Home</a>
-                <a href="#">Texte</a>
-                <a href="index.php?module=projet&action=projets">Projets</a>
-                <a href="index.php?module=messagerie&action=conversations">Messagerie</a>
-                <a href="deconnexion.php">Déconnexion</a>
+      
+        echo'
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php?module=projet&action=projets">Gestion des Projets</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=etudiant&action=home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=&action=">Texte</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=projet&action=projets">Projets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=messagerie&action=conversations">Messagerie</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-light ms-auto" href="deconnexion.php">Déconnexion</a>
+                </div>
             </div>
-        </div>';
+        </nav>';
     }
     
     public static function afficherNavigationEnseignant() {
-        echo '<div class="navbar">
-            <img src="./public/images/logoiutmontreuil-sommaire.png" alt="Logo IUT Montreuil">
-            <div>
-                <a href="#">Home</a>
-                <a href="#">Texte</a>
-                <a href="index.php?module=projet&action=projets">Projets</a>
-                <a href="index.php?module=messagerie&action=conversations">Messagerie</a>
-                <a href="deconnexion.php">Déconnexion</a>
+        echo'
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.php?module=projet&action=projets">Gestion des Projets</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=etudiant&action=home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=projet_enseignant&action=projets">Accueil Projets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=projet_enseignant&action=creerProjet">Créer Projet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=projet_enseignant&action=creerRendu">Créer Rendu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=projet_enseignant&action=listeProjets">Liste des Projets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?module=projet_enseignant&action=listeRendus">Liste des Rendus</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-light ms-auto" href="deconnexion.php">Déconnexion</a>
+                </div>
             </div>
-        </div>';
+        </nav>';
     }
     
 

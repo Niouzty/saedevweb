@@ -10,6 +10,7 @@ class ControleurProjet {
         $this->modele = new ModeleProjet();
     }
 
+    /*
     public function afficherProjets() {
         $vue = new VueProjet();
 
@@ -18,6 +19,12 @@ class ControleurProjet {
             exit;
         }
 
+        $projets = $this->modele->getProjets();
+        $vue->afficherProjets($projets);
+    }
+*/
+    public function afficherProjets() {
+        $vue = new VueProjet();
         $projets = $this->modele->getProjets();
         $vue->afficherProjets($projets);
     }

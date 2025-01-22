@@ -19,6 +19,7 @@ class ModuleProjet extends ModuleGenerique {
                 case 'rendus':
                     // Afficher les rendus pour un projet
                     if (isset($_GET['projet_id'])) {
+                        
                         $this->controleur->afficherRendus($_GET['projet_id']);
                     }
                     break;

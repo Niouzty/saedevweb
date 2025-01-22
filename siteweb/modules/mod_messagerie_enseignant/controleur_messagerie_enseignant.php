@@ -47,7 +47,7 @@ class ControleurMessagerieEnseignant {
             $conversationId = $this->modele->createConversation($idGroupe, $titre);
 
             header("Location: ?module=messagerie_enseignant&action=messages&conversation_id=$conversationId");
-            exit;<?php
+            <?php
             class VueMessagerie {
                 public function afficherConversations($conversations) {
                     ?>
