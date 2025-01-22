@@ -106,7 +106,8 @@ class Template {
                                     <a class="nav-link" href="index.php?module=enseignant&action=home">Home</a>
                                 </li>  
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.php?module=groupe&action=groupes">Groupe</a>
+                                    <a class="nav-link" href="index.php?module=enseignant&action=afficherGroupes">Groupe</a> 
+                    
                                 </li> 
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?module=projet_enseignant&action=projets">Projet</a>
