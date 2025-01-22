@@ -2,27 +2,47 @@
 class VueMessagerie {
     public function afficherConversations($conversations) {
         ?>
-
         <head>
-            <link rel="stylesheet" href="./public/css/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
         </head>
-        <div class="messagerie-body">
-            <div class="messagerie-sidebar">
-                <h2>Groupes</h2>
-                <?php if (!empty($conversations)): ?>
-                    <div class="messagerie-group-list">
-                        <?php foreach ($conversations as $conversation): ?>
-                            <div class="messagerie-group-item" onclick="loadConversation(<?= $conversation['id_conversation']; ?>)">
-                                Groupe <?= htmlspecialchars($conversation['id_conversation']); ?>
-                            </div>
-                        <?php endforeach; ?>
+
+        <?php
+            Template::afficherNavigationEtudiant();
+        ?>
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title mb-0">Groupes</h5>
+                        </div>
+                        <div class="list-group">
+                            <?php if (!empty($conversations)): ?>
+                                <?php foreach ($conversations as $conversation): ?>
+                                    <button class="list-group-item list-group-item-action" onclick="loadConversation(<?= $conversation['id_conversation']; ?>)">
+                                        Groupe <?= htmlspecialchars($conversation['id_conversation']); ?>
+                                    </button>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="list-group-item text-center text-muted">
+                                    Aucun groupe disponible.
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                <?php else: ?>
-                    <p class="messagerie-no-groups">Aucun groupe disponible.</p>
-                <?php endif; ?>
-            </div>
-            <div class="messagerie-container" id="conversation-container">
-                <p>Sélectionnez un groupe pour afficher la conversation.</p>
+                </div>
+
+                <!-- Conversation -->
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body" id="conversation-container">
+                            <p class="text-muted">Sélectionnez un groupe pour afficher la conversation.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -41,19 +61,22 @@ class VueMessagerie {
 
     public function afficherMessages($messages) {
         ?>
-         <head>
-            <link rel="stylesheet" href="./public/css/style.css">
-        </head>
-        <div class="messagerie-message-list">
+        <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <div class="list-group">
             <?php if (!empty($messages)): ?>
                 <?php foreach ($messages as $message): ?>
-                    <div class="messagerie-message">
-                        <p class="messagerie-message-content"><?= htmlspecialchars($message['contenu']); ?></p>
-                        <span class="messagerie-message-date"><?= htmlspecialchars($message['date_envoi']); ?></span>
+                    <div class="list-group-item">
+                        <p class="mb-1"><?= htmlspecialchars($message['contenu']); ?></p>
+                        <small class="text-muted"><?= htmlspecialchars($message['date_envoi']); ?></small>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="messagerie-no-messages">Aucun message dans cette conversation.</p>
+                <div class="text-center text-muted">
+                    Aucun message dans cette conversation.
+                </div>
             <?php endif; ?>
         </div>
         <?php
@@ -61,13 +84,15 @@ class VueMessagerie {
 
     public function afficherFormulaireMessage($conversationId) {
         ?>
-         <head>
-            <link rel="stylesheet" href="./public/css/style.css">
+        <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
         </head>
-        <form class="messagerie-input" method="POST" action="?module=messagerie&action=envoyer">
+        <form class="input-group mt-3" method="POST" action="?module=messagerie&action=envoyer">
             <input type="hidden" name="conversation_id" value="<?= $conversationId; ?>">
-            <textarea name="content" placeholder="Écrivez un message..." required></textarea>
-            <button type="submit" class="messagerie-send-button">Envoyer</button>
+            <textarea name="content" class="form-control" placeholder="Écrivez un message..." required></textarea>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
         <?php
     }

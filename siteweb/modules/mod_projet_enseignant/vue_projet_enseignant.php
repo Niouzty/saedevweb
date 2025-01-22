@@ -50,7 +50,7 @@ class VueProjetEnseignant extends VueGenerique {
                     <tbody>
                         <?php foreach ($ressources as $ressource): ?>
                             <tr>
-                                <td><?= htmlspecialchars($ressource['type']); ?></td>
+                                <td><?= htmlspecialchars($ressource['fichier']); ?></td>
                                 <td><?= htmlspecialchars($ressource['chemin_contenu']); ?></td>
                                 <td><?= $ressource['mise_en_avant'] ? 'Oui' : 'Non'; ?></td>
                                 <td>
@@ -153,35 +153,43 @@ class VueProjetEnseignant extends VueGenerique {
     
             <div class="container mt-4">
                 <h1 class="mb-4">Liste des Rendus</h1>
-                <table class="table table-striped">
-                    <thead class="table-primary">
-                        <tr>
-                            <th scope="col">Rendu</th>
-                            <th scope="col">Projet</th>
-                            <th scope="col">Date de Dépôt</th>
-                            <th scope="col">Fichier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rendus as $rendu): ?>
+                
+                <?php if (empty($rendus)): ?>
+                    <div class="alert alert-warning" role="alert">
+                        Aucun rendu n'a été trouvé.
+                    </div>
+                <?php else: ?>
+                    <table class="table table-striped">
+                        <thead class="table-primary">
                             <tr>
-                                <td><?= htmlspecialchars($rendu['id_rendu']); ?></td>
-                                <td><?= htmlspecialchars($rendu['id_projet']); ?></td>
-                                <td><?= htmlspecialchars($rendu['date_depot']); ?></td>
-                                <td>
-                                    <a href="<?= htmlspecialchars($rendu['type']); ?>" class="btn btn-sm btn-success" target="_blank">
-                                        Télécharger
-                                    </a>
-                                </td>
+                                <th scope="col">Rendu</th>
+                                <th scope="col">Projet</th>
+                                <th scope="col">Date de Dépôt</th>
+                                <th scope="col">Fichier</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($rendus as $rendu): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($rendu['id_rendu']); ?></td>
+                                    <td><?= htmlspecialchars($rendu['id_projet']); ?></td>
+                                    <td><?= htmlspecialchars($rendu['date_depot']); ?></td>
+                                    <td>
+                                        <a href="<?= htmlspecialchars($rendu['fichier']); ?>" class="btn btn-sm btn-success" target="_blank">
+                                            Télécharger
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
             </div>
         </body>
         </html>
         <?php
     }
+    
     
 
     // Afficher le formulaire de création de projet

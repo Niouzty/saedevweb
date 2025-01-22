@@ -9,15 +9,9 @@ class ControleurProjet {
     public function __construct() {
         $this->modele = new ModeleProjet();
     }
-
+    
     public function afficherProjets() {
         $vue = new VueProjet();
-
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: login.php");
-            exit;
-        }
-
         $projets = $this->modele->getProjets();
         $vue->afficherProjets($projets);
     }
@@ -29,22 +23,18 @@ class ControleurProjet {
         $vue->afficherRendus($rendus, $projetId);
     }
 
-    public function deposerRendu() {
-        // Vérification de l'upload
-        if (isset($_FILES['fichier'])) {
-            $fichier = $_FILES['fichier'];
-            $cheminCible = __DIR__ . '/uploads/' . basename($fichier['name']);
-    
-            if (move_uploaded_file($fichier['tmp_name'], $cheminCible)) {
-                // Sauvegarde du rendu dans la base de données
-                $this->modele->saveRendu($projetId, $userId, $cheminCible);
-                header("Location: ?module=projet&action=rendus&projet_id=$projetId");
-                exit;
-            } else {
-                echo "Erreur lors de l'upload du fichier.";
-            }
+    public function deposerRendu($projetId) {
+        var_dump($projetId);
+        if ($projetId && $_SESSION['user_id']) {
+            $this->modele->deposerRendu($projetId, $_SESSION['user_id']);
         } else {
-            echo "Aucun fichier sélectionné.";
+            echo "Erreur : Projet ou utilisateur non défini.";
         }
     }
+    
+    /*
+    public function deposerRendu(){
+        $this->modele->deposerRendu();
+    }*/
+
 }

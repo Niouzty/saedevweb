@@ -34,11 +34,7 @@ class ModuleMessagerie extends ModuleGenerique {
                     // Créer une nouvelle conversation
                     $this->controleur->creerConversation();
                     break;
-                case 'messages_ajax':
-                    if (isset($_GET['conversation_id'])) {
-                        $this->controleur->afficherMessagesAjax($_GET['conversation_id']);
-                    }
-                        break;
+    
                 default:
                     echo "Action non reconnue.";
             }

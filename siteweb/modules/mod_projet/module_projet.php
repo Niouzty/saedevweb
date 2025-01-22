@@ -6,8 +6,6 @@ class ModuleProjet extends ModuleGenerique {
     public function __construct() {
         $this->controleur = new ControleurProjet();
 
-        // Debugging : Affichage de l'action
-        echo var_dump($_GET['action']);
         
         // Vérification de l'action
         if (isset($_GET['action'])) {
@@ -19,12 +17,13 @@ class ModuleProjet extends ModuleGenerique {
                 case 'rendus':
                     // Afficher les rendus pour un projet
                     if (isset($_GET['projet_id'])) {
+                        
                         $this->controleur->afficherRendus($_GET['projet_id']);
                     }
                     break;
                 case 'deposer':
                     // Déposer un rendu
-                    $this->controleur->deposerRendu();
+                    $this->controleur->deposerRendu($_GET['projet_id']);
                     break;
                 default:
                     echo "Action non reconnue.";

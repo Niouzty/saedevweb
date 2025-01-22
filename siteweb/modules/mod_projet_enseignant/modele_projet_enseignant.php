@@ -7,14 +7,14 @@ class ModeleProjetEnseignant extends ModeleGenerique {
     }
 
     public function getRendus($projetId) {
-        $query = $this->bdd->prepare("SELECT id_rendu, id_projet, date_depot, type FROM rendu WHERE id_projet = :projetId");
+        $query = $this->bdd->prepare("SELECT id_rendu, id_projet, date_depot, fichier FROM rendu WHERE id_projet = :projetId");
         $query->bindParam(':projetId', $projetId, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAllRendus() {
-        $query = $this->bdd->query("SELECT id_rendu, id_projet, date_depot, fichier FROM rendu");
+        $query = $this->bdd->query("SELECT id_etudiant, id_rendu, date_depot, fichier FROM doit_rendre");
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
     
@@ -47,7 +47,7 @@ class ModeleProjetEnseignant extends ModeleGenerique {
     
     public function getRessourcesByProjet($idProjet) {
         $query = $this->bdd->prepare("
-            SELECT id_ressource, id_projet, type, chemin_contenu, mise_en_avant 
+            SELECT id_ressource, id_projet, fichier, chemin_contenu, mise_en_avant 
             FROM ressource 
             WHERE id_projet = :idProjet
         ");
@@ -59,7 +59,7 @@ class ModeleProjetEnseignant extends ModeleGenerique {
     // Ajouter une ressource pour un projet
     public function ajouterRessource($idProjet, $type, $cheminContenu, $miseEnAvant = false) {
         $query = $this->bdd->prepare("
-            INSERT INTO ressource (id_projet, type, chemin_contenu, mise_en_avant) 
+            INSERT INTO ressource (id_projet, fichier, chemin_contenu, mise_en_avant) 
             VALUES (:idProjet, :type, :cheminContenu, :miseEnAvant)
         ");
         $query->bindParam(':idProjet', $idProjet, PDO::PARAM_INT);
@@ -72,7 +72,7 @@ class ModeleProjetEnseignant extends ModeleGenerique {
 
     // Supprimer une ressource
     public function supprimerRessource($idRessource) {
-        $query = $this->bdd->prepare("DELETE FROM ressource WHERE id_ressource = :idRessource");
+        $query = $this->bdd->prepare("DELETE FROM ressource WHERE id_ressource = :idRessource;");
         $query->bindParam(':idRessource', $idRessource, PDO::PARAM_INT);
         return $query->execute();
     }
