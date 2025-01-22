@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+ini_set('memory_limit', '512M'); // Augmente la limite à 512 Mo
+
 require_once "connexion.php";
 require_once "site.php";
 require_once __DIR__ . '/core/module_generique.php';
