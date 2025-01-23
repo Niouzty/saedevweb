@@ -9,28 +9,32 @@ class VueEtudiant extends VueGenerique {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil Étudiant</title>
-    <link rel="stylesheet" href="./public/css/style.css"> <!-- Lien vers le CSS -->
     <!-- Inclure Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
+    <style>
+        .highlight {
+            background-color: #f8d7da; /* Couleur de fond pour les moments spéciaux */
+        }
+        .emploi-du-temps h1, .emploi-du-temps h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <!-- Barre de navigation -->
-     
     <?php
         Template::afficherNavigationEtudiant(); // Appel de la méthode pour afficher la navigation
     ?>
 
-
     <!-- Contenu principal -->
-    <div class="container">
+    <div class="container mt-5">
         <div class="emploi-du-temps">
             <h1>Accueil Étudiant</h1>
             <h2>Jeudi 19 décembre 2024</h2>
-            <table>
-                <thead>
+            <table class="table table-bordered table-striped text-center">
+                <thead class="table-dark">
                     <tr>
                         <th>Horaire</th>
                         <th>Lundi</th>
@@ -63,7 +67,6 @@ class VueEtudiant extends VueGenerique {
                         <td>Arts</td>
                         <td>Anglais</td>
                         <td>Mathématiques</td>
-                    
                         <td>Mathématiques</td>
                     </tr>
                     <tr>

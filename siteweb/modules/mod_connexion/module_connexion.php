@@ -24,4 +24,3 @@ class ModuleConnexion extends ModuleGenerique {
         return new ModeleConnexion(); // Supposons que vous avez une classe ModeleConnexion
     }
 }
-

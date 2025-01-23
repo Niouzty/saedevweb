@@ -1,6 +1,7 @@
 <?php
 require_once "modele_projet_enseignant.php";
 require_once "vue_projet_enseignant.php";
+require_once "module_projet_enseignant.php"; // Ajout de cette ligne
 
 class ControleurProjetEnseignant {
     protected $modele;
@@ -9,77 +10,104 @@ class ControleurProjetEnseignant {
         $this->modele = new ModeleProjetEnseignant();
     }
 
-    // Afficher la liste des projets
+
     public function afficherProjets() {
         $vue = new VueProjetEnseignant();
         $projets = $this->modele->getProjets();
         $vue->afficherProjets($projets);
     }
 
-    // Afficher les rendus d'un projet
     public function afficherRendus($projetId) {
         $vue = new VueProjetEnseignant();
         $rendus = $this->modele->getRendus($projetId);
         $vue->afficherListeRendus($rendus);
     }
 
-    //afficher la liste des rendus
     public function afficherListeRendus() {
         $vue = new VueProjetEnseignant();
-        $rendus = $this->modele->getAllRendus(); // Récupère tous les rendus depuis le modèle
-        $vue->afficherListeRendus($rendus); // Appelle la vue pour afficher les rendus
+        $rendus = $this->modele->getAllRendus();
+        $vue->afficherListeRendus($rendus);
     }
 
-    // Créer un nouveau projet
+    public function afficherRessources($idProjet) {
+        $vue = new VueProjetEnseignant();
+        $ressources = $this->modele->getRessourcesByProjet($idProjet);
+        $vue->afficherRessources($ressources, $idProjet);
+    }
+
+    public function supprimerRessource($idRessource) {
+        $vue = new VueProjetEnseignant();
+        $ressources = $this->modele->supprimerRessource($idRessource);
+    }
+
+    public function ajouterRessource($idProjet) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $type = $_POST['fichier'] ?? 'fichier';
+            $miseEnAvant = isset($_POST['mise_en_avant']) ? true : false;
+
+            $uploadDir = __DIR__ . '/fichier/';
+            if (!is_dir($uploadDir)) {
+                if (!mkdir($uploadDir, 0755, true)) {
+                    die("Erreur : Impossible de créer le dossier $uploadDir.");
+                }
+            }
+
+            if (!empty($_FILES['chemin_contenu']['name'])) {
+                $chemin = $uploadDir . basename($_FILES['chemin_contenu']['fichier']);
+                if (move_uploaded_file($_FILES['chemin_contenu']['fichier'], $chemin)) {
+                    if ($this->modele->ajouterRessource($idProjet, $type, 'modules/mod_projet_enseignant/fichier/' . basename($_FILES['chemin_contenu']['fichier']), $miseEnAvant)) {
+                        header("Location: ?module=projet_enseignant&action=ressources&projet_id=$idProjet");
+                        exit;
+                    } else {
+                        echo "Erreur lors de l'ajout de la ressource à la base de données.";
+                    }
+                } else {
+                    echo "Erreur lors de l'upload du fichier.";
+                }
+            } else {
+                echo "Veuillez sélectionner un fichier.";
+            }
+        }
+    }
+
     public function creerProjet() {
         $vue = new VueProjetEnseignant();
-    
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Récupération des données du formulaire
             $titre = $_POST['titre'] ?? '';
             $description = $_POST['description'] ?? '';
             $annee = $_POST['annee'] ?? '';
             $semestre = $_POST['semestre'] ?? '';
             $intervenants = $_POST['intervenants'] ?? [];
-            $ressources = $_FILES['ressources'] ?? null;
-    
-            // Création du projet
-            $idProjet = $this->modele->sauvegarderProjet($titre, $description, $annee, $semestre);
-    
-            if ($idProjet) {
-                // Association des intervenants au projet
+            $ressources = $_FILES['ressources'] ?? [];
+
+            $projetId = $this->modele->sauvegarderProjet($titre, $description, $annee, $semestre);
+
+            if ($projetId) {
                 foreach ($intervenants as $idEnseignant) {
-                    $this->modele->associerIntervenant($idProjet, $idEnseignant);
+                    $this->modele->attribuerIntervenant($projetId, $idEnseignant);
                 }
-    
-                // Téléchargement et association des ressources
-                if ($ressources && is_array($ressources['name'])) {
-                    for ($i = 0; $i < count($ressources['name']); $i++) {
-                        if ($ressources['error'][$i] === UPLOAD_ERR_OK) {
-                            $cheminFichier = 'uploads/' . basename($ressources['name'][$i]);
-                            if (move_uploaded_file($ressources['tmp_name'][$i], $cheminFichier)) {
-                                $this->modele->ajouterRessource($ressources['name'][$i], $idProjet, $cheminFichier);
-                            }
+
+                foreach ($ressources['name'] as $index => $name) {
+                    if ($ressources['error'][$index] === UPLOAD_ERR_OK) {
+                        $chemin = 'uploads/' . basename($ressources['name'][$index]);
+                        if (move_uploaded_file($ressources['tmp_name'][$index], $chemin)) {
+                            //$this->modele->ajouterRessource($projetId, $chemin);
                         }
                     }
                 }
-    
-                // Redirection après succès
+
                 header("Location: ?module=projet_enseignant&action=projets");
                 exit;
             } else {
                 $vue->afficherMessage("Erreur lors de la création du projet.", "danger");
             }
         } else {
-            // Chargement des enseignants et affichage du formulaire
             $enseignants = $this->modele->getEnseignants();
-            $ressources = $this->modele->getRessources();
-            $vue->afficherFormulaireProjet($enseignants, $ressources);
+            $vue->afficherFormulaireProjet($enseignants, []);
         }
     }
-    
 
-    // Créer un nouveau rendu
     public function creerRendu() {
         $vue = new VueProjetEnseignant();
 
@@ -88,8 +116,8 @@ class ControleurProjetEnseignant {
             $fichier = $_FILES['fichier'] ?? null;
 
             if ($fichier && $fichier['error'] === UPLOAD_ERR_OK) {
-                $cheminFichier = 'uploads/' . basename($fichier['fichier']);
-                if (move_uploaded_file($fichier['fichier'], $cheminFichier)) {
+                $cheminFichier = 'uploads/' . basename($fichier['name']);
+                if (move_uploaded_file($fichier['tmp_name'], $cheminFichier)) {
                     if ($this->modele->sauvegarderRendu($projetId, $cheminFichier)) {
                         header("Location: ?module=projet_enseignant&action=rendus&projet_id=$projetId");
                         exit;
@@ -108,3 +136,5 @@ class ControleurProjetEnseignant {
     }
 }
 ?>
+
+
