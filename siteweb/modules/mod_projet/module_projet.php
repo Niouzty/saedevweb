@@ -23,7 +23,7 @@ class ModuleProjet extends ModuleGenerique {
                     break;
                 case 'deposer':
                     // Déposer un rendu
-                    $this->controleur->deposerRendu();
+                    $this->controleur->deposerRendu($_GET['projet_id']);
                     break;
                 default:
                     echo "Action non reconnue.";

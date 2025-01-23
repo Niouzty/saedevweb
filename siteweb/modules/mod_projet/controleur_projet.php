@@ -23,10 +23,18 @@ class ControleurProjet {
         $vue->afficherRendus($rendus, $projetId);
     }
 
-    public function deposerRendu(){
-        $this->modele->deposerRendu();
+    public function deposerRendu($projetId) {
+        var_dump($projetId);
+        if ($projetId && $_SESSION['user_id']) {
+            $this->modele->deposerRendu($projetId, $_SESSION['user_id']);
+        } else {
+            echo "Erreur : Projet ou utilisateur non défini.";
+        }
     }
     
-    
-    
+    /*
+    public function deposerRendu(){
+        $this->modele->deposerRendu();
+    }*/
+
 }
