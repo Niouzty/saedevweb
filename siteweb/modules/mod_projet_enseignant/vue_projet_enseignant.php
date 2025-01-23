@@ -108,7 +108,7 @@ class VueProjetEnseignant extends VueGenerique {
                                     <h5 class="card-title"><?= htmlspecialchars($projet['nom']); ?></h5>
                                     <p class="card-text"><?= htmlspecialchars($projet['description']); ?></p>
                                     <p class="card-text"><small class="text-muted">Année: <?= htmlspecialchars($projet['annee']); ?>, Semestre: <?= htmlspecialchars($projet['semestre']); ?></small></p>
-                                    <<a href="?module=projet&action=rendus&projet_id=<?= htmlspecialchars($projet['id_projet']); ?>" class="btn btn-primary">Voir les rendus</a>
+                                    <a href="?module=projet_enseignant&action=rendus&projet_id=<?= $projet['id_projet']; ?>" class="btn btn-primary">Voir les rendus</a>
                                 </div>
                             </div>
                         </div>

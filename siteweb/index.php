@@ -22,9 +22,6 @@ if (isset($_GET['module'])) {
         $filePath = $basePath . 'module_' . $module . ($role === 'enseignant' ? '_enseignant' : '') . '.php';
     }
 
-    // Debugging : Afficher les chemins calculés
-    echo "Module : $module<br>";
-    echo "Chemin recherché : $filePath<br>";
 
     if (file_exists($filePath)) {
         require_once $filePath;
@@ -34,8 +31,6 @@ if (isset($_GET['module'])) {
         if ($role === 'enseignant') {
             $classeModule .= 'Enseignant';
         }
-
-        echo "Classe attendue : $classeModule<br>";
 
         if (class_exists($classeModule)) {
             new $classeModule();

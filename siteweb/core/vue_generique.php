@@ -1,5 +1,7 @@
 <?php
 class VueGenerique {
+
+    
     public function afficherPageAccueil() {
         Template::afficherEnTete("Page d'accueil");
         echo "<main>
